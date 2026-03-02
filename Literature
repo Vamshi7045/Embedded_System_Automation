@@ -114,3 +114,14 @@ Future Expansion: The system can be expanded with additional sensors or integrat
 IoT networks.
 Safety and Compliance: The design will adhere to data privacy standards and environmental
 regulations.
+
+# References 
+G. A. DeMichele, "ESP32 Home Automation Projects: A Complete Guide to Building Your Own Smart
+Home," Apress, 2018. This book provides practical examples and step-by-step instructions for
+building home automation systems using the ESP32.
+J. R. Martinez and M. B. Shah, "IoT-Based Home Automation Using ESP32: Design and
+Implementation," IEEE Access, vol. 8, pp. 103456-103468, 2020. This article discusses the design
+and implementation aspects of home automation systems using the ESP32.
+S. Gupta and R. Kumar, "Integrating ESP32 with IoT Platforms for Smart Home Solutions," in
+Proceedings of the IEEE International Conference on Internet of Things (IoT), 2021, pp. 88-94. This
+paper explores the integration of ESP32 with various IoT platforms for creating smart home
