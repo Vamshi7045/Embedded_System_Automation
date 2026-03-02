@@ -1,99 +1,52 @@
-# Embedded_System_Automation
-Environmental monitoring using the ESP32 is an IoT-based system that collects real-time data like temperature, humidity, and air quality through sensors
+#include <Wire.h>
+#include <LiquidCrystal_I2C.h>
+LiquidCrystal_I2C lcd(0x27,16,2); //Change the HEX address
+#include <Servo.h>
+Servo myservo1;
+int IR1 = 2;
+int IR2 = 6;
+int Slot = 5; //Enter Total number of parking Slots
+int flag1 = 0;
+int flag2 = 0;
+void setup() {
+ lcd.begin();
+ lcd.backlight();
+pinMode(IR1, INPUT);
+pinMode(IR2, INPUT);
 
-# Introduction
-Here's the project proposal for an "Environment monitoring using ESP32”.
-
-# General Introduction
-Air pollution is a critical concern in today's world, leading to numerous health issues and
-environmental problems. An Environment monitoring system is essential to track real-time air
-pollution levels, providing actionable insights to both the public and authorities. The ESP32
-microcontroller, with its Wi-Fi capabilities and affordability, enables the development of a costeffective and efficient system for monitoring Environment data and displaying it on a centralized
-platform accessible through mobile or web applications.
-Purpose and Importance
-Health and Safety: Monitoring Environment helps individuals protect their health, particularly
-those with respiratory conditions.
-Data for Action: Real-time data can aid governments and organizations in making decisions to
-improve air quality.
-Public Awareness: The system allows individuals to stay informed about the Environment in their
-environment, promoting more informed behavior.
-
-# Problem Statement
-Current Environment monitoring systems can be expensive and inaccessible to the general public.
-This project aims to develop a low-cost, scalable, and user-friendly Environment monitoring
-system using the ESP32 microcontroller. The system will provide real-time data on key pollutants
-and display the information on a mobile or web interface.
-
-# Objectives of the Study
-Develop a Low-Cost Monitoring System: Use ESP32 to design an affordable system for
-monitoring air quality.
-Provide Real-Time Data: Continuously gather and display real-time Environment metrics such as
-PM2.5, PM10, and CO2 levels.
-Design an Intuitive Interface: Develop a mobile or web-based interface to display Environment
-Page 3 of 7
-data in real-time.
-
-# Scope of the Project
-- Design and develop an Environment monitoring system using ESP32.
-- Integrate sensors for pollutants such as PM2.5, PM10, and CO2.
-- Display the data in real-time on a web or mobile interface.
-- Ensure data privacy and accuracy.
-
-# Literature Review
-Introduction:
-Environment monitoring systems are vital tools for assessing pollution levels and mitigating
-environmental and health impacts. The ESP32 has been widely used in IoT applications for its
-cost-effectiveness and Wi-Fi capabilities.
-Existing Technologies and Methods:
-- Environment monitoring traditionally uses expensive sensors and cellular/GSM networks for
-data transmission. The ESP32 offers a more affordable solution with its built-in Wi-Fi and realtime communication capabilities.
-Research Background:
-- Research by Gupta and Raj (2019) highlights the use of IoT platforms for Environment
-monitoring, emphasizing the role of the ESP32 in cost-effective, scalable solutions.
-Research Gaps:
-Many Environment monitoring systems are either costly or complex, limiting their widespread
-use. This project aims to fill the gap by developing a user-friendly, affordable system that provides
-accurate real-time Environment data.
-
-# Abstract
-This project proposes an environmental monitoring system utilizing the ESP32 microcontroller,
-MQ-135 air quality sensor, and DHT11 temperature and humidity sensor. The primary goal is to
-provide real-time monitoring of air quality and environmental conditions, offering insights into
-Page 4 of 7
-temperature, humidity, and levels of harmful gases like ammonia, carbon dioxide, and benzene.
-The ESP32, known for its low power consumption and Wi-Fi capabilities, acts as the central unit
-for data collection and transmission. The MQ-135 sensor detects air pollutants, while the DHT11
-sensor measures temperature and humidity levels, both of which are critical for assessing
-environmental quality. Data from these sensors are processed by the ESP32 and transmitted
-wirelessly to a cloud-based platform or displayed on a connected device. This system provides an
-efficient and scalable solution for tracking and analyzing environmental conditions, contributing
-to health and safety improvements in smart homes, factories, or urban environments. The project
-emphasizes real-time data logging, with the potential for further expansion into advanced
-analytics and automation.
-
-# Methodology
-1. Project Planning and Requirements Analysis
- - Assess Environment parameters (MQ-135) and data requirements.
- - Plan the budget, system components, and resources.
-2. System Design
- - Select the ESP32 and compatible Environment sensors (e.g., MQ135 sensor).
- - Develop the system architecture for data collection and real-time display.
-3. Installation
- - Install sensors and configure the ESP32 for data transmission.
- - Establish connections to cloud storage or local database for real-time data logging.
-4. Testing and Commissioning
- - Test the system for real-time data accuracy and network connectivity.
- - Create user manuals and documentation for future maintenance.
-
-# Expected Output
-The project will result in a fully functional Environment monitoring system using the ESP32. The
-system will provide real-time data on air pollutants and display this information via a web or
-mobile interface. The system will be affordable and scalable for wider adoption.
-
-# Other Relevant Information
-Justification for Components: The ESP32 is chosen for its cost-effectiveness and Wi-Fi capability,
-making it suitable for real-time monitoring.
-Future Expansion: The system can be expanded with additional sensors or integrated into larger
-IoT networks.
-Safety and Compliance: The design will adhere to data privacy standards and environmental
-regulations.
+myservo1.attach(3);
+myservo1.write(100);
+lcd.setCursor (0,0);
+lcd.print(" ARDUINO ");
+lcd.setCursor (0,1);
+lcd.print(" PARKING SYSTEM ");
+delay (2000);
+lcd.clear();
+}
+void loop(){
+if(digitalRead (IR1) == LOW && flag1==0){
+if(Slot>0){flag1=1;
+if(flag2==0){myservo1.write(0); Slot = Slot-1;}
+}else{
+lcd.setCursor (0,0);
+lcd.print(" SORRY :( ");
+lcd.setCursor (0,1);
+lcd.print(" Parking Full ");
+delay (3000);
+lcd.clear();
+}
+}
+if(digitalRead (IR2) == LOW && flag2==0){flag2=1;
+if(flag1==0){myservo1.write(0); Slot = Slot+1;}
+}
+if(flag1==1 && flag2==1){
+delay (1000);
+myservo1.write(100);
+flag1=0, flag2=0;
+}
+lcd.setCursor (0,0);
+lcd.print(" WELCOME! ");
+lcd.setCursor (0,1);
+lcd.print("Slot Left: ");
+lcd.print(Slot);
+}
