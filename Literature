@@ -47,7 +47,6 @@ monitoring air quality.
 Provide Real-Time Data: Continuously gather and display real-time Environment metrics such as
 PM2.5, PM10, and CO2 levels.
 Design an Intuitive Interface: Develop a mobile or web-based interface to display Environment
-Page 3 of 7
 data in real-time.
 
 # Scope of the Project
@@ -76,7 +75,6 @@ accurate real-time Environment data.
 This project proposes an environmental monitoring system utilizing the ESP32 microcontroller,
 MQ-135 air quality sensor, and DHT11 temperature and humidity sensor. The primary goal is to
 provide real-time monitoring of air quality and environmental conditions, offering insights into
-Page 4 of 7
 temperature, humidity, and levels of harmful gases like ammonia, carbon dioxide, and benzene.
 The ESP32, known for its low power consumption and Wi-Fi capabilities, acts as the central unit
 for data collection and transmission. The MQ-135 sensor detects air pollutants, while the DHT11
